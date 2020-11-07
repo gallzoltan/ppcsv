@@ -8,6 +8,8 @@ import (
 
 type Excelrow struct {
 	Name       string
+	Pcode      string
+	City       string
 	Address    string
 	Email      string
 	Tel        string
@@ -18,6 +20,7 @@ type Excelrow struct {
 	Startdate  string
 }
 
+var rawmap []Excelrow
 var readymap []Excelrow
 var failedmap []Excelrow
 
@@ -32,7 +35,7 @@ func (d Excelrow) ReadXLSX(f string) {
 
 	for rows.Next() {
 		row := rows.Columns()
-		readymap = append(readymap, Excelrow{
+		rawmap = append(rawmap, Excelrow{
 			Name:       row[0],
 			Address:    row[1],
 			Email:      row[2],
@@ -44,6 +47,7 @@ func (d Excelrow) ReadXLSX(f string) {
 			Startdate:  row[8],
 		})
 	}
+	validateDatas()
 }
 
 func (d Excelrow) GetReadyMap() []Excelrow {
@@ -52,4 +56,16 @@ func (d Excelrow) GetReadyMap() []Excelrow {
 
 func (d Excelrow) GetFailedMap() []Excelrow {
 	return failedmap
+}
+
+func splitAddress(adr string) []string {
+	var result []string
+	return result
+}
+
+func validateDatas() {
+	readymap = rawmap
+	// for _, row := range rawmap {
+	// 	log.Println(row.Address)
+	// }
 }
