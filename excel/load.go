@@ -18,10 +18,12 @@ type Excelrow struct {
 	Startdate  string
 }
 
+var readymap []Excelrow
+var failedmap []Excelrow
+
 func init() {}
 
-func (d Excelrow) ReadXLSX(f string) []Excelrow {
-	var mapping []Excelrow
+func (d Excelrow) ReadXLSX(f string) {
 	xlsx, err := excelize.OpenFile(f)
 	if err != nil {
 		log.Fatal(err)
@@ -30,7 +32,7 @@ func (d Excelrow) ReadXLSX(f string) []Excelrow {
 
 	for rows.Next() {
 		row := rows.Columns()
-		mapping = append(mapping, Excelrow{
+		readymap = append(readymap, Excelrow{
 			Name:       row[0],
 			Address:    row[1],
 			Email:      row[2],
@@ -42,10 +44,12 @@ func (d Excelrow) ReadXLSX(f string) []Excelrow {
 			Startdate:  row[8],
 		})
 	}
-
-	return mapping
 }
 
-// func GetXLSXRows(f string) []ExcelRow {
-// 	return readXLSX(f)
-// }
+func (d Excelrow) GetReadyMap() []Excelrow {
+	return readymap
+}
+
+func (d Excelrow) GetFailedMap() []Excelrow {
+	return failedmap
+}
