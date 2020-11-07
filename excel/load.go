@@ -6,20 +6,22 @@ import (
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
-type ExcelRow struct {
-	name       string
-	address    string
-	email      string
-	tel        string
-	device     string
-	sn         string
-	srvname    string
-	buyingdate string
-	startdate  string
+type Excelrow struct {
+	Name       string
+	Address    string
+	Email      string
+	Tel        string
+	Device     string
+	Sn         string
+	Srvname    string
+	Buyingdate string
+	Startdate  string
 }
 
-func readXLSX(f string) []ExcelRow {
-	var mapping []ExcelRow
+func init() {}
+
+func (d Excelrow) ReadXLSX(f string) []Excelrow {
+	var mapping []Excelrow
 	xlsx, err := excelize.OpenFile(f)
 	if err != nil {
 		log.Fatal(err)
@@ -28,25 +30,22 @@ func readXLSX(f string) []ExcelRow {
 
 	for rows.Next() {
 		row := rows.Columns()
-		mapping = append(mapping, ExcelRow{
-			name:       row[0],
-			address:    row[1],
-			email:      row[2],
-			tel:        row[3],
-			device:     row[4],
-			sn:         row[5],
-			srvname:    row[6],
-			buyingdate: row[7],
-			startdate:  row[8],
+		mapping = append(mapping, Excelrow{
+			Name:       row[0],
+			Address:    row[1],
+			Email:      row[2],
+			Tel:        row[3],
+			Device:     row[4],
+			Sn:         row[5],
+			Srvname:    row[6],
+			Buyingdate: row[7],
+			Startdate:  row[8],
 		})
 	}
-	// m := map[string]interface{}{
-	// 	"Data": mapping,
-	// }
-	// fmt.Println(m["Data"])
+
 	return mapping
 }
 
-func GetXLSXRows(f string) []ExcelRow {
-	return readXLSX(f)
-}
+// func GetXLSXRows(f string) []ExcelRow {
+// 	return readXLSX(f)
+// }
