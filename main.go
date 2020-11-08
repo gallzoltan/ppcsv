@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -43,10 +44,13 @@ func saveCsv(datas []excel.Excelrow, fn string) {
 }
 
 func main() {
-	log.Println("The program has started...")
+	xlsxFile := flag.String("source", "./568588.xlsx", "a forrás xlsx fájl helye")
+	//xlsxFile := "./bin/testfiles/568588.xlsx"
+	flag.Parse()
 
+	log.Println("The program has started...")
 	d := new(excel.Excelrow)
-	d.ReadXLSX("./bin/testfiles/568588.xlsx")
+	d.ReadXLSX(*xlsxFile)
 	saveCsv(d.GetReadyMap(), "readylist.csv")
 	saveCsv(d.GetFailedMap(), "failedlist.csv")
 
