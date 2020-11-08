@@ -19,18 +19,18 @@ Két darab csv fájl lesz az eredmény:
 - **readylist.csv** : feldolgozásra kész rekordok
 Mezőlista:
 ```
-	Name       string
-	Pcode      string
-	City       string
-	Address    string
-	DefAdr     string
-	Email      string
-	Tel        string
-	Device     string
-	Sn         string
-	Srvname    string
-	Buyingdate string
-	Startdate  string
+Name       string //Név és vezetéknév
+Pcode      string //Irányítószám - parse
+City       string //Helység - parse
+Address    string //Cím - parse
+DefAdr     string //Eredeti cím
+Email      string //E-mail
+Tel        string //Telefonszáma
+Device     string //Készülék típusa
+Sn         string //S / N készülék
+Srvname    string //Szerviznév
+Buyingdate string //Vásárlás dátuma
+Startdate  string //Készülék kezdési dátuma
 ```
 A csv fájlok karakterkódolása: utf8 
 a mezőelválasztó karakter: ';'
@@ -49,7 +49,7 @@ A -h kapcsoló a konzolra írja a további lehetőségeket:
 
 c:\path\to\ppcsv.exe -h
 
-Usage of C:\path\to\dat2xlsx.exe:
+Usage of C:\path\to\ppcsv.exe
   -source
         az xlsx forrás fájl helye (default ".\568588.xlsx")
 ```
