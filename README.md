@@ -15,8 +15,23 @@ c:\path\to\ppcsv.exe
 ```
 Ebben az esetben az **568588.xlsx** fájlnak a programmal azonos könyvtárban kell lennie
 Két darab csv fájl lesz az eredmény:
-- **faliedlist.csv** ide kerülnek a további feldolgozást igénylő rekordok
-- **readylist.csv** feldolgozásra kész rekordok
+- **failedlist.csv** : ide kerülnek a további feldolgozást igénylő rekordok
+- **readylist.csv** : feldolgozásra kész rekordok
+Mezőlista:
+```
+	Name       string
+	Pcode      string
+	City       string
+	Address    string
+	DefAdr     string
+	Email      string
+	Tel        string
+	Device     string
+	Sn         string
+	Srvname    string
+	Buyingdate string
+	Startdate  string
+```
 A csv fájlok karakterkódolása: utf8 
 a mezőelválasztó karakter: ';'
 nincs szöveg megjelölés.
@@ -32,9 +47,9 @@ A -h kapcsoló a konzolra írja a további lehetőségeket:
 
 ```cmd
 
-c:\path\to\dat2xlsx.exe -h
+c:\path\to\ppcsv.exe -h
 
 Usage of C:\path\to\dat2xlsx.exe:
   -source
-        az xlsx forrás fájl helye (default ".\datexport.xlsx")
+        az xlsx forrás fájl helye (default ".\568588.xlsx")
 ```
