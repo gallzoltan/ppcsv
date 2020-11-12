@@ -89,7 +89,7 @@ func splitAddress(line string) [3]string {
 func validateDatas() {
 	//readymap = rawmap
 	for _, row := range rawmap {
-		if row.City == "" {
+		if row.City == "" || row.Pcode == "" || len(row.Sn) != 28 {
 			failedmap = append(failedmap, row)
 		} else {
 			readymap = append(readymap, row)
