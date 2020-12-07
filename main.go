@@ -16,20 +16,25 @@ func saveCsv(datas []excel.Excelrow, fn string) {
 		f.Close()
 		return
 	}
-	for _, row := range datas {
+	for i, row := range datas {
+		if i == 0 {
+			row.City = "Helység"
+			row.Pcode = "Irsz"
+		}
 		fmt.Fprintf(f, "%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
 			row.Name,
 			row.Pcode,
 			row.City,
 			row.Address,
-			row.DefAdr,
+			//row.DefAdr,
 			row.Email,
 			row.Tel,
 			row.Device,
 			row.Sn,
 			row.Srvname,
 			row.Buyingdate,
-			row.Startdate)
+			row.Startdate,
+			row.PartnerID)
 		if err != nil {
 			log.Fatal(err)
 			return
@@ -52,7 +57,7 @@ func main() {
 	d := new(excel.Excelrow)
 	d.ReadXLSX(*xlsxFile)
 	saveCsv(d.GetReadyMap(), "readylist.csv")
-	saveCsv(d.GetFailedMap(), "failedlist.csv")
+	//saveCsv(d.GetFailedMap(), "failedlist.csv")
 
 	log.Println("The program has been finished.")
 }
