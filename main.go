@@ -21,17 +21,13 @@ func saveCsv(datas []excel.Excelrow, fn string) {
 			row.City = "Helység"
 			row.Pcode = "Irsz"
 		}
-		fmt.Fprintf(f, "%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
+		fmt.Fprintf(f, "%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
 			row.Name,
 			row.Pcode,
 			row.City,
 			row.Address,
-			//row.DefAdr,
-			row.Email,
-			row.Tel,
 			row.Device,
 			row.Sn,
-			row.Srvname,
 			row.Buyingdate,
 			row.Startdate,
 			row.PartnerID)
@@ -52,12 +48,11 @@ func main() {
 	xlsxFile := flag.String("source", "./568588.xlsx", "a forrás xlsx fájl helye")
 	//xlsxFile := "./bin/testfiles/568588.xlsx"
 	flag.Parse()
-
 	log.Println("The program has started...")
+
 	d := new(excel.Excelrow)
 	d.ReadXLSX(*xlsxFile)
 	saveCsv(d.GetReadyMap(), "readylist.csv")
-	//saveCsv(d.GetFailedMap(), "failedlist.csv")
 
 	log.Println("The program has been finished.")
 }

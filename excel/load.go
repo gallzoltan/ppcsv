@@ -13,20 +13,14 @@ type Excelrow struct {
 	Pcode      string
 	City       string
 	Address    string
-	DefAdr     string
-	Email      string
-	Tel        string
 	Device     string
 	Sn         string
-	Srvname    string
 	Buyingdate string
 	Startdate  string
 	PartnerID  string
 }
 
 var rawmap []Excelrow
-var readymap []Excelrow
-var failedmap []Excelrow
 
 func init() {}
 
@@ -45,31 +39,20 @@ func (d Excelrow) ReadXLSX(f string) {
 			Pcode:      adr[0],
 			City:       adr[1],
 			Address:    adr[2],
-			DefAdr:     row[1],
-			Email:      row[2],
-			Tel:        row[3],
-			Device:     row[4],
-			Sn:         row[5],
-			Srvname:    row[6],
-			Buyingdate: row[7],
-			Startdate:  row[8],
-			PartnerID:  row[9],
+			Device:     row[2],
+			Sn:         row[3],
+			Buyingdate: row[4],
+			Startdate:  row[5],
+			PartnerID:  row[6],
 		})
 	}
-	validateDatas()
 }
 
 func (d Excelrow) GetReadyMap() []Excelrow {
-	return readymap
-}
-
-func (d Excelrow) GetFailedMap() []Excelrow {
-	return failedmap
+	return rawmap
 }
 
 func splitAddress(line string) [3]string {
-	//\b(\d{4})(?!(\/|\)))\b
-	//\b[1-9]\d{3}\b(?!(\/|\)))
 	var valid = regexp.MustCompile(`\b^[1-9]\d{3}\b`)
 	result := [3]string{"", "", ""}
 
@@ -86,15 +69,4 @@ func splitAddress(line string) [3]string {
 		result[2] = line
 	}
 	return result
-}
-
-func validateDatas() {
-	readymap = rawmap
-	// for _, row := range rawmap {
-	// 	if row.City == "" || row.Pcode == "" || len(row.Sn) != 28 {
-	// 		failedmap = append(failedmap, row)
-	// 	} else {
-	// 		readymap = append(readymap, row)
-	// 	}
-	// }
 }
